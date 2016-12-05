@@ -26,10 +26,10 @@ def track(request):
 
 def querySpotify(query, type):
     if query == '':
-        context = {'list_of_songs': [], 'length': 0, 'result': {}}
+        context = {'items': [], 'length': 0, 'query': ''}
         return context
     else:
         sp = spotipy.Spotify()
         search_result = sp.search(q=query, type=type)
-        context = {'list_of_songs': search_result[type + 's']['items'], 'length': search_result[type + 's']['total'], 'result': search_result}
+        context = {'items': search_result[type + 's']['items'], 'length': search_result[type + 's']['total'], 'query': query}
         return context

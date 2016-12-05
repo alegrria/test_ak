@@ -60,7 +60,7 @@
       <form class="form-horizontal">
         <div class="form-group form-group-lg">
           <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-            <input class="form-control" type="text" id="formGroupInputLarge" placeholder="Search..." name="q">
+            <input class="form-control" type="text" id="formGroupInputLarge" placeholder="Search..." name="q" value="{{ query }}"></input>
             <button class="search-icon" href=""><i class="fa fa-search" aria-hidden="true"></i></button>
             <p class="error">Please fill out the form.</p>
           </div>
@@ -70,16 +70,16 @@
     <div class="container">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2">
         <ul class="results">
-        {% for song in list_of_songs %}
-        {% with song.images|last as image %}
-        <li><img height="64" class="thumb" src="{{ image.url }}">{{ song.name }}</li>
+        {% for item in items %}
+        {% with item.images|last as image %}
+        <li><img height="64" class="thumb" src="{{ image.url }}">{{ item.name }}</li>
         {% endwith %}
         {% endfor %}
 
         </ul>
       </div>
     </div>
-    {{ result }}
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
