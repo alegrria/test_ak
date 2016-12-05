@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from test_mlj.models import Song
@@ -6,8 +6,7 @@ import spotipy
 
 
 def index(request):
-    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
-    return render(request, 'test_mlj/index.html', context)
+    return redirect('track')
 
 def album(request):
     result = querySpotify(request.GET.get('q', ''), 'album')
