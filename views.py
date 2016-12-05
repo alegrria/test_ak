@@ -6,52 +6,28 @@ import spotipy
 
 
 def index(request):
-    song1 = Song('song1', 'pic1')
-    song2 = Song('song2', 'pic2')
-    list_of_songs = []
-    list_of_songs.append(song1)
-    list_of_songs.append(song2)
-
     context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
     return render(request, 'test_mlj/index.html', context)
 
 def album(request):
-    song1 = Song('song1', 'pic1')
-    song2 = Song('song2', 'pic2')
-    list_of_songs = []
-    list_of_songs.append(song1)
-    list_of_songs.append(song2)
     result = querySpotify(request.GET.get('q', ''), 'album')
-    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs), 'result': result}
-    return render(request, 'test_mlj/index.html', context)
+    return render(request, 'test_mlj/index.html', result)
 
 def artist(request):
-    song1 = Song('song1', 'pic1')
-    song2 = Song('song2', 'pic2')
-    list_of_songs = []
-    list_of_songs.append(song1)
-    list_of_songs.append(song2)
-    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
-    return render(request, 'test_mlj/index.html', context)
+    result = querySpotify(request.GET.get('q', ''), 'artist')
+    return render(request, 'test_mlj/index.html', result)
 
 def playlist(request):
-    song1 = Song('song1', 'pic1')
-    song2 = Song('song2', 'pic2')
-    list_of_songs = []
-    list_of_songs.append(song1)
-    list_of_songs.append(song2)
-    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
-    return render(request, 'test_mlj/index.html', context)
+    result = querySpotify(request.GET.get('q', ''), 'playlist')
+    return render(request, 'test_mlj/index.html', result)
 
 def track(request):
-    song1 = Song('song1', 'pic1')
-    song2 = Song('song2', 'pic2')
-    list_of_songs = []
-    list_of_songs.append(song1)
-    list_of_songs.append(song2)
-    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
-    return render(request, 'test_mlj/index.html', context)
+    result = querySpotify(request.GET.get('q', ''), 'track')
+    return render(request, 'test_mlj/index.html', result)
 
 def querySpotify(query, type):
     sp = spotipy.Spotify()
-    return sp.search(q=query, type=type)
+    search_result = sp.search(q=query, type=type)
+    
+    context = {'list_of_songs': search_result[type + 's']['items'], 'length': search_result[type + 's']['total'], 'result': search_result}
+    return context
