@@ -71,7 +71,9 @@
       <div class="col-xs-12 col-sm-8 col-sm-offset-2">
         <ul class="results">
         {% for song in list_of_songs %}
-        <li><img class="thumb" src="{{ song.images.2.url }}">{{ song.name }}</li>
+        {% with song.images|last as image %}
+        <li><img height="64" class="thumb" src="{{ image.url }}">{{ song.name }}</li>
+        {% endwith %}
         {% endfor %}
 
         </ul>

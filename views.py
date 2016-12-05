@@ -26,8 +26,11 @@ def track(request):
     return render(request, 'test_mlj/index.html', result)
 
 def querySpotify(query, type):
-    sp = spotipy.Spotify()
-    search_result = sp.search(q=query, type=type)
-    
-    context = {'list_of_songs': search_result[type + 's']['items'], 'length': search_result[type + 's']['total'], 'result': search_result}
-    return context
+    if query == '':
+        context = {'list_of_songs': [], 'length': 0, 'result': {}}
+        return context
+    else:
+        sp = spotipy.Spotify()
+        search_result = sp.search(q=query, type=type)
+        context = {'list_of_songs': search_result[type + 's']['items'], 'length': search_result[type + 's']['total'], 'result': search_result}
+        return context
