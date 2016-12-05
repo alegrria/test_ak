@@ -9,7 +9,7 @@ def index(request):
     list_of_songs = []
     list_of_songs.append(song1)
     list_of_songs.append(song2)
-    context = {'list_of_songs': list_of_songs}
+    context = {'list_of_songs': list_of_songs, 'length': len(list_of_songs)}
     
     return render(request, 'test_mlj/index.html', context)
 
