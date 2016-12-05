@@ -9,5 +9,5 @@ def index(request):
     list_of_songs = []
     list_of_songs.append(song1.name)
     list_of_songs.append(song2.name)
-    return HttpResponse(list_of_songs)
+    return render(request, 'test_mlj/index.html', {})
 
